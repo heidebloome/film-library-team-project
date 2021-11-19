@@ -10,9 +10,18 @@ async function getData() {
     const movies = await apiService.getMovies();
     // console.log(movies);
     showMovies(movies.results);
+    removeVote();
   } catch (error) {
     console.error(error);
   }
+}
+
+function removeVote() {
+  const refsVoteAverage = refs.galleryList.querySelectorAll('.descr__vote');
+
+  refsVoteAverage.forEach(element => {
+    element.classList.remove('visible');
+  });
 }
 
 function showMovies(movies) {

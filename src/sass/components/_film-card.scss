@@ -33,11 +33,14 @@
 
 .descr__vote {
   display: none;
-  // display: inline-block;
-  // background-color: $additionalAccentColor;
-  // color: $whiteColor;
-  // border-radius: 5px;
-  // padding: 1px 9px;
+}
+
+.descr__vote.visible {
+  display: inline-block;
+  background-color: $additionalAccentColor;
+  color: $whiteColor;
+  border-radius: 5px;
+  padding: 1px 9px;
 }
 
 /********************** tablet *******************************/
