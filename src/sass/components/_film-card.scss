@@ -32,15 +32,12 @@
 }
 
 .descr__vote {
-  display: none;
-}
-
-.descr__vote.visible {
   display: inline-block;
   background-color: $additionalAccentColor;
   color: $whiteColor;
   border-radius: 5px;
   padding: 1px 9px;
+  margin-left: 5px;
 }
 
 /********************** tablet *******************************/
