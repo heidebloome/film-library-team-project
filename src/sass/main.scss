@@ -9,13 +9,13 @@
 
 @import './base/reset';
 @import './base/body';
-@import './base//container';
+@import './base/container';
 @import './base/icon';
 
 @import './components/header-main-page';
 @import './components/header-library-page';
-@import './components/film-card';
 @import './components/film-container';
+@import './components/film-card';
 @import './components/modal-film-card';
 @import './components/footer';
 @import './components/modal-about-us';
