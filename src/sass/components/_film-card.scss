@@ -16,10 +16,15 @@
 
 .descr {
   margin-top: 10px;
+  font-weight: 500;
+  font-size: 0.75em;
+  line-height: 1.16;
 }
 
 .descr__title {
   text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 2px;
 }
 
 .descr__genres-year {
@@ -27,11 +32,12 @@
 }
 
 .descr__vote {
-  display: inline-block;
-  background-color: $additionalAccentColor;
-  color: $whiteColor;
-  border-radius: 5px;
-  padding: 1px 9px;
+  display: none;
+  // display: inline-block;
+  // background-color: $additionalAccentColor;
+  // color: $whiteColor;
+  // border-radius: 5px;
+  // padding: 1px 9px;
 }
 
 /********************** tablet *******************************/
@@ -47,6 +53,10 @@
 
   .film-list__item:nth-child(2n) {
     margin-left: 15px;
+  }
+
+  .descr {
+    line-height: 1.33;
   }
 }
 
@@ -64,5 +74,9 @@
 
   .film-list__item:nth-child(3n) {
     margin-left: 18px;
+  }
+
+  .descr {
+    line-height: 1.33;
   }
 }
