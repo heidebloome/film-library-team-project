@@ -3,4 +3,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"./../images/pics/mobile-main-1x.jpg":[["mobile-main-1x.2d47a89a.jpg","TmF8"],"TmF8"],"./../images/pics/mobile-main-2x.jpg":[["mobile-main-2x.dd8772f0.jpg","q6kn"],"q6kn"],"./../images/pics/tablet-main-1x.jpg":[["tablet-main-1x.ea2ba746.jpg","hGtK"],"hGtK"],"./../images/pics/tablet-main-2x.jpg":[["tablet-main-2x.bc59deb7.jpg","EMGT"],"EMGT"],"./../images/pics/desktop-main-1x.jpg":[["desktop-main-1x.9fd2be17.jpg","Y5XE"],"Y5XE"],"./../images/pics/desktop-main-2x.jpg":[["desktop-main-2x.d9278608.jpg","IYmD"],"IYmD"]}],"I9BA":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");
 },{"./sass/main.scss":"clu1"}]},{},["I9BA"], null)
-//# sourceMappingURL=/film-library-team-project/library.8e34c5d2.js.map
+//# sourceMappingURL=/film-library-team-project/library.0b304a90.js.map
