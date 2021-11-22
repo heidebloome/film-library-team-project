@@ -1,8 +1,9 @@
 .section__header {
-  max-width: 320px;
+  // max-width: 320px;
   height: 230px;
   margin: 0 auto;
   margin-bottom: 60px;
+  // background: linear-gradient(270deg, rgb(0, 0, 0), rgb(0, 0, 0));
   background: {
     size: cover;
     repeat: no-repeat;
@@ -134,11 +135,10 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
-  position: relative;
   background: transparent;
   border: none;
   border-bottom: 0.5px solid $whiteColor;
-  width: 280px;
+  width: 100%;
   outline: none;
   cursor: pointer;
   &::placeholder {
@@ -149,13 +149,12 @@
   }
 }
 .search-form {
+  position: relative;
   text-align: center;
   padding-bottom: 97px;
 }
 .search-icon {
   position: absolute;
   transform: translateX(-100%) translateY(25%);
-  // transform: translateY(155%);
-  //   left: 52px;
   z-index: 1;
 }
