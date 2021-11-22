@@ -2,7 +2,8 @@
   margin: 0 auto 20px;
 }
 
-.film-list__item:hover {
+.film-list__item:hover,
+.film-list__item:focus {
   cursor: pointer;
 
   .thumb {
