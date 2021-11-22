@@ -43,6 +43,17 @@
   }
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 .header__container {
   width: 100%;
   margin: 0 auto;
@@ -129,6 +140,7 @@
   border-bottom: 0.5px solid $whiteColor;
   width: 280px;
   outline: none;
+  cursor: pointer;
   &::placeholder {
     color: $whiteColor;
   }
@@ -142,8 +154,8 @@
 }
 .search-icon {
   position: absolute;
-  transform: translateX(-100%);
-  //   transform: translateY(155%);
+  transform: translateX(-100%) translateY(25%);
+  // transform: translateY(155%);
   //   left: 52px;
   z-index: 1;
 }
