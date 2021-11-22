@@ -7,39 +7,46 @@
   background: {
     size: cover;
     repeat: no-repeat;
+
     position: center;
-    image: url(../images/pics/mobile-main-1x.jpg);
+    image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/pics/mobile-main-1x.jpg);
   }
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     .section__header {
-      background-image: url(../images/pics/mobile-main-2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/pics/mobile-main-2x.jpg);
     }
   }
   @media screen and (min-width: 481px) {
     max-width: 768px;
-    background-image: url(../images/pics/tablet-main-1x.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/pics/tablet-main-1x.jpg);
   }
   @media (min-device-pixel-ratio: 2) and (min-width: 481px),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     .section__header {
-      background-image: url(../images/pics/tablet-main-2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/pics/tablet-main-2x.jpg);
     }
   }
   @media screen and (min-width: 769px) {
-    max-width: 1024px;
-    background-image: url(../images/pics/desktop-main-1x.jpg);
+    max-width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/pics/desktop-main-1x.jpg);
   }
   @media (min-device-pixel-ratio: 2) and (min-width: 769px),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     .section__header {
-      background-image: url(../images/pics/desktop-main-2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/pics/desktop-main-2x.jpg);
     }
   }
 }
@@ -112,7 +119,7 @@
   position: absolute;
   width: 34px;
   background: $accentColor;
-  height: 4px;
+  height: 3px;
 }
 
 .logo__text {
