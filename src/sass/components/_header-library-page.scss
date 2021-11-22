@@ -1,6 +1,7 @@
 .header {
   padding-top: 46px;
   padding-bottom: 65px;
+  background-color: rgba(0, 0, 0, 0.712);
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url('./../images/pics/mobile-library-1x.jpg');
   background-repeat: no-repeat;
@@ -38,7 +39,7 @@
   }
 
   @include for-size(desktop) {
-    background-size: 1024px 230px;
+    // background-size: 1024px 230px;
   }
 }
 
@@ -115,6 +116,7 @@
   background-color: transparent;
   border: 1px solid $whiteColor;
   border-radius: 5px;
+  cursor: pointer;
 
   @include for-size(tablet) {
     &:not(:last-child) {
@@ -124,10 +126,10 @@
 
   &:hover,
   &:focus {
-    background-color: $additionalAccentColor;
     border-color: $additionalAccentColor;
   }
 
+  // вешаем этот клас на активную кнопку
   &--current {
     background-color: $additionalAccentColor;
     border-color: $additionalAccentColor;
