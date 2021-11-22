@@ -1,0 +1,137 @@
+.header {
+  padding-top: 46px;
+  padding-bottom: 65px;
+  background-color: rgba(0, 0, 0, 0.712);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url('./../images/pics/mobile-library-1x.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @media screen and (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('./../images/pics/mobile-library-2x.jpg');
+  }
+
+  @include for-size(mobile) {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('./../images/pics/tablet-library-1x.jpg');
+
+    @media screen and (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url('./../images/pics/tablet-library-2x.jpg');
+    }
+  }
+
+  @include for-size(tablet) {
+    padding-top: 41px;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('./../images/pics/desktop-library-1x.jpg');
+
+    @media screen and (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url('./../images/pics/desktop-library-2x.jpg');
+    }
+  }
+
+  @include for-size(desktop) {
+    // background-size: 1024px 230px;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 51px;
+
+  @include for-size(tablet) {
+    margin-bottom: 45px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    display: none;
+    margin-left: 10px;
+    @include font(30px, 500, 35px);
+    color: $whiteColor;
+
+    @include for-size(tablet) {
+      display: block;
+    }
+  }
+}
+
+.site-nav {
+  display: flex;
+  align-self: end;
+
+  &__item:not(:last-child) {
+    margin-right: 39px;
+  }
+
+  &__link {
+    position: relative;
+    padding: 7px 0;
+    @include font(12px, 500, 14px);
+    color: $whiteColor;
+    text-transform: uppercase;
+  }
+}
+
+.site-nav__link--current::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  height: 3px;
+  background-color: $accentColor;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+
+  @include for-size(tablet) {
+    justify-content: center;
+  }
+}
+
+.filter__btn {
+  width: 129px;
+  padding: 14px 0 12px;
+  text-align: center;
+  @include font(12px, 500, 16px);
+  text-transform: uppercase;
+  color: $whiteColor;
+  background-color: transparent;
+  border: 1px solid $whiteColor;
+  border-radius: 5px;
+  cursor: pointer;
+
+  @include for-size(tablet) {
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $additionalAccentColor;
+  }
+
+  // вешаем этот клас на активную кнопку
+  &--current {
+    background-color: $additionalAccentColor;
+    border-color: $additionalAccentColor;
+  }
+}
