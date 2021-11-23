@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { genres } from './genres';
 
+import emtyFilmCard from '../images/emty-film.jpg';
+
 // Ключ API (v3 auth)
 // 93fd20970d74d9a3f9466d8d6c9e6297
 
@@ -38,7 +40,7 @@ function formatVote(voteNumber) {
 
 //экспорт функций запросов
 export default class SearchAPI {
-  #baseUrl = 'https://api.themoviedb.org/3/';
+  #baseUrl = 'https://api.themoviedb.org/3';
   #page = 1;
 
   constructor() {
@@ -78,6 +80,10 @@ export default class SearchAPI {
         movie.genre_ids = formatGenres(movie.genre_ids);
         movie.release_date = formatYear(movie.release_date);
         movie.vote_average = formatVote(movie.vote_average);
+
+        if (!movie.poster_path) {
+          movie.own_poster_path = emtyFilmCard;
+        }
       });
 
       //возвращаем фильмы
@@ -90,12 +96,16 @@ export default class SearchAPI {
   //запрос на фильм по по ID
   async getMovieById(movieId) {
     try {
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`);
+      const response = await axios.get(`${this.#baseUrl}/movie/${movieId}`);
       const movie = await response.data;
 
       //форматируем поле с жанрами фильма
       const movieGenres = movie.genres.map(element => element.name).join(', ');
       movie.genres = movieGenres;
+
+      if (!movie.poster_path) {
+        movie.own_poster_path = emtyFilmCard;
+      }
 
       //возвращаем фильм
       return movie;

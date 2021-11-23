@@ -1,9 +1,13 @@
 {{#each this}}
 <li class="film-list__item" data-id-number='{{id}}'>
 	<div class="thumb">
+		{{#if poster_path}}
 		<img srcset=" https://image.tmdb.org/t/p/w300{{poster_path}} 1x,
  				https://image.tmdb.org/t/p/w780{{poster_path}} 2x" src='https://image.tmdb.org/t/p/w300{{poster_path}}'
 			alt="photo">
+		{{else}}
+		<img src='{{own_poster_path}}' alt="photo">
+		{{/if}}
 	</div>
 	<div class="descr">
 		<h4 class="descr__title">{{title}}</h4>
