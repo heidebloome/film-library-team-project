@@ -40,7 +40,7 @@ function formatVote(voteNumber) {
 
 //экспорт функций запросов
 export default class SearchAPI {
-  #baseUrl = 'https://api.themoviedb.org/3/';
+  #baseUrl = 'https://api.themoviedb.org/3';
   #page = 1;
 
   constructor() {
@@ -96,7 +96,7 @@ export default class SearchAPI {
   //запрос на фильм по по ID
   async getMovieById(movieId) {
     try {
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`);
+      const response = await axios.get(`${this.#baseUrl}/movie/${movieId}`);
       const movie = await response.data;
 
       //форматируем поле с жанрами фильма
