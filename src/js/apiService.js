@@ -37,17 +37,38 @@ function formatVote(voteNumber) {
 }
 
 //экспорт функций запросов
-export default {
+export default class SearchAPI {
+  #baseUrl = 'https://api.themoviedb.org/3/';
+  #page = 1;
+
+  constructor() {
+    this.searchQuery = '';
+  }
+
+  get page() {
+    return this.#page;
+  }
+
+  set page(numOfPage) {
+    this.#page = numOfPage;
+  }
+
   //запрос на фильмы по ключевому слову или самые популярные
-  async getMovies(query) {
+  async getMovies() {
     let response;
     try {
-      if (query) {
+      if (this.searchQuery) {
         response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?language=en-US&query=${query}&page=1&include_adult=false`,
+          `${this.#baseUrl}/search/movie?language=en-US&query=${this.searchQuery}&page=${
+            this.#page
+          }&include_adult=false`,
         );
       } else {
-        response = await axios.get('https://api.themoviedb.org/3/trending/movie/week');
+        response = await axios.get(
+          `${this.#baseUrl}/trending/movie/week?language=en-US&page=${
+            this.#page
+          }&include_adult=false`,
+        );
       }
 
       const movies = await response.data;
@@ -64,7 +85,7 @@ export default {
     } catch (error) {
       console.error(error);
     }
-  },
+  }
 
   //запрос на фильм по по ID
   async getMovieById(movieId) {
@@ -81,5 +102,5 @@ export default {
     } catch (error) {
       console.error(error);
     }
-  },
-};
+  }
+}
