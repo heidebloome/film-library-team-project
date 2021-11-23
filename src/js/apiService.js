@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { genres } from './genres';
 
+import emtyFilmCard from '../images/emty-film.jpg';
+
 // Ключ API (v3 auth)
 // 93fd20970d74d9a3f9466d8d6c9e6297
 
@@ -78,6 +80,10 @@ export default class SearchAPI {
         movie.genre_ids = formatGenres(movie.genre_ids);
         movie.release_date = formatYear(movie.release_date);
         movie.vote_average = formatVote(movie.vote_average);
+
+        if (!movie.poster_path) {
+          movie.own_poster_path = emtyFilmCard;
+        }
       });
 
       //возвращаем фильмы
