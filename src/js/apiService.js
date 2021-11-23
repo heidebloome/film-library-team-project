@@ -103,6 +103,10 @@ export default class SearchAPI {
       const movieGenres = movie.genres.map(element => element.name).join(', ');
       movie.genres = movieGenres;
 
+      if (!movie.poster_path) {
+        movie.own_poster_path = emtyFilmCard;
+      }
+
       //возвращаем фильм
       return movie;
     } catch (error) {
