@@ -5,4 +5,4 @@ $(window).scroll(function(){$(this).scrollTop()>100?$(".upbutton").fadeIn():$(".
 },{}],"I9BA":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/up-btn.js");
 },{"./sass/main.scss":"clu1","./js/up-btn.js":"e4yY"}]},{},["I9BA"], null)
-//# sourceMappingURL=/film-library-team-project/library.98455dbd.js.map
+//# sourceMappingURL=/film-library-team-project/library.820edb8b.js.map
