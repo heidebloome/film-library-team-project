@@ -6,6 +6,8 @@ import { refs } from './refs.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
+import { openModalCard } from './modal-film-card.js';
+
 const apiService = new SearchAPI();
 
 getData();
@@ -22,6 +24,11 @@ async function getData() {
 
 function showMovies(movies) {
   refs.galleryList.innerHTML = card(movies);
+
+  const cards = document.querySelectorAll('.film-list__item');
+  cards.forEach(card => {
+    card.addEventListener('click', openModalCard);
+  });
 }
 
 /*******************поиск по запросу******************************* */

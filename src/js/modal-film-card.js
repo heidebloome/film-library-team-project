@@ -2,18 +2,14 @@ import filmCard from '../templates/modal-film-card-template.hbs';
 import { refs } from './refs.js';
 import SearchAPI from './apiService';
 
+const apiService = new SearchAPI();
+
 const modal = document.querySelector('.modal-overlay');
 const buttonClose = document.querySelector('.modal-close-js');
+const modalCard = document.querySelector('.modal-js');
 
-setTimeout(() => {
-  const cards = document.querySelectorAll('.film-list__item');
-  //   console.log(cards);
-  cards.forEach(card => {
-    card.addEventListener('click', openModalCard);
-  });
-}, 500);
-
-function openModalCard(evt) {
+export function openModalCard(evt) {
+  modalCard.innerHTML = '';
   buttonClose.addEventListener('click', toClickButtonClose);
   window.addEventListener('keydown', onEscKeyPress);
   modal.addEventListener('click', toClickOnOverlay);
@@ -21,6 +17,22 @@ function openModalCard(evt) {
   if (evt) {
     modal.classList.remove('is-hidden');
   }
+  const filmId = evt.currentTarget.dataset.idNumber;
+  // console.log(filmId);
+  getFilmInfo(filmId);
+}
+
+async function getFilmInfo(filmId) {
+  try {
+    const filmInfo = await apiService.getMovieById(filmId);
+    cardMarkup(filmInfo);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function cardMarkup(filmInfo) {
+  modalCard.insertAdjacentHTML('beforeend', filmCard(filmInfo));
 }
 
 function closeModalCard() {
