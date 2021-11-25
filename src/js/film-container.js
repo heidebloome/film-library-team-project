@@ -6,6 +6,8 @@ import { refs } from './refs.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
+import { addPagination } from './pagination';
+
 import { openModalCard } from './modal-film-card.js';
 
 const apiService = new SearchAPI();
@@ -61,3 +63,12 @@ async function onInputSearch(event) {
     console.error(error);
   }
 }
+
+addPagination()
+
+window.pagination.on('afterMove', event => {
+   // const currentPage = event.page;
+   // console.log(currentPage);
+   apiService.page = event.page;
+   getData()
+});
