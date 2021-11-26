@@ -30,8 +30,9 @@ async function getFilmInfo(filmId) {
     cardMarkup(filmInfo);
     const buttonWatched = document.querySelector('.modal__watch-list');
     const buttonQueue = document.querySelector('.modal__queue-list');
-    buttonWatched.addEventListener('click', addWatched(filmInfo));
-     buttonQueue.addEventListener('click', addQueue(filmInfo));
+    buttonWatched.addEventListener('click', add => addWatched(filmInfo));
+    buttonQueue.addEventListener('click', add => addQueue(filmInfo));
+     
   } catch (error) {
     console.error(error);
   }
