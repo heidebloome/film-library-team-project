@@ -55,6 +55,10 @@ export default class SearchAPI {
     this.#page = numOfPage;
   }
 
+  ressetPage() {
+    this.#page = 1;
+  }
+
   //запрос на фильмы по ключевому слову или самые популярные
   async getMovies() {
     let response;
@@ -103,9 +107,13 @@ export default class SearchAPI {
       const movieGenres = movie.genres.map(element => element.name).join(', ');
       movie.genres = movieGenres;
 
+      //форматируем постер фильма
       if (!movie.poster_path) {
         movie.own_poster_path = emtyFilmCard;
       }
+
+      //форматируем поле popularity
+      movie.popularity = Math.round(movie.popularity);
 
       //возвращаем фильм
       return movie;
