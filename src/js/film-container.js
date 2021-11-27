@@ -6,7 +6,7 @@ import { refs } from './refs.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
-import { addPagination } from './pagination';
+import { pagination } from './pagination';
 
 import { openModalCard } from './modal-film-card.js';
 
@@ -18,10 +18,16 @@ async function getData() {
   try {
     const movies = await apiService.getMovies();
     // console.log(movies);
+    pagination.reset(movies.total_results);
+    // pagination.getCurrentPage(apiService.page)
+    console.log(movies);
+    // pagination.movePageTo(apiService.page);
     showMovies(movies.results);
   } catch (error) {
     console.error(error);
   }
+
+  
 }
 
 function showMovies(movies) {
@@ -58,6 +64,7 @@ async function onInputSearch(event) {
   try {
     Loading.standard();
     const movies = await apiService.getMovies();
+    pagination.reset(movies.total_results)
     Loading.remove();
 
     if (movies.total_results > 0) {
@@ -72,11 +79,23 @@ async function onInputSearch(event) {
   }
 }
 
-addPagination();
+// Скролл на начало страницы   
 
-window.pagination.on('afterMove', event => {
-  // const currentPage = event.page;
-  // console.log(currentPage);
+ function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    belavior: 'smooth',
+  });
+}
+
+// Пагинация 
+
+pagination.on('afterMove', showNewPage);
+
+async function showNewPage(event) {
   apiService.page = event.page;
-  getData();
-});
+  const movies = await apiService.getMovies();
+
+  showMovies(movies.results)
+  scrollToTop() 
+}
