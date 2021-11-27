@@ -55,6 +55,10 @@ export default class SearchAPI {
     this.#page = numOfPage;
   }
 
+    ressetPage() {
+    this.#page = 1;
+  }
+
   //запрос на фильмы по ключевому слову или самые популярные
   async getMovies() {
     let response;
