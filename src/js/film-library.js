@@ -4,7 +4,6 @@ import { openModalCard } from './modal-film-card.js';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import { addPagination } from './pagination';
 
 window.addEventListener('load', onWatchedBtnClick);
 refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
@@ -14,36 +13,47 @@ function onWatchedBtnClick() {
   refs.watchedBtn.classList.add('filter__btn--current');
   refs.queueBtn.classList.remove('filter__btn--current');
 
-  const watchedMoviesInfo = localStorage.getItem('WATCHED');
-  const parsedWatchedMovies = JSON.parse(watchedMoviesInfo);
-
   if (!localStorage.getItem('WATCHED')) {
     Notify.failure('Your watched list is empty. Add any movie.');
+    refs.galleryList.innerHTML = '';
     return;
   }
 
   Loading.standard();
-  showMoviesCards(parsedWatchedMovies.watched);
+  showMoviesCards(getLocalStorageDataByKey(`WATCHED`));
   Loading.remove();
-
-  //   console.log(parsedWatchedMovies.watched);
 }
 
 function onQueueBtnClick() {
   refs.queueBtn.classList.add('filter__btn--current');
   refs.watchedBtn.classList.remove('filter__btn--current');
 
-  const queueMoviesInfo = localStorage.getItem('QUEUE');
-  const parsedQueueMovies = JSON.parse(queueMoviesInfo);
-
   if (!localStorage.getItem('QUEUE')) {
     Notify.failure('Your queue list is empty. Add any movie.');
+    refs.galleryList.innerHTML = '';
     return;
   }
 
   Loading.standard();
-  showMoviesCards(parsedQueueMovies.queue);
+  showMoviesCards(getLocalStorageDataByKey(`QUEUE`));
   Loading.remove();
+}
+
+function getLocalStorageDataByKey(key) {
+  const data = localStorage.getItem(key);
+  const parsedData = JSON.parse(data);
+  const moviesArr = parsedData[key.toLowerCase()];
+
+  moviesArr.forEach(movie => {
+    const genresArr = movie.genres.split(', ');
+    if (genresArr.length > 2) {
+      genresArr.splice(2, genresArr.length, 'Other');
+    }
+    movie.genre_ids = movie.genres ? genresArr.join(', ') : 'undefined';
+    movie.release_date = movie.release_date ? movie.release_date.slice(0, 4) : 'undefined';
+  });
+  console.log(moviesArr);
+  return moviesArr;
 }
 
 function showMoviesCards(movies) {
