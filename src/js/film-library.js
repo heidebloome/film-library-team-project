@@ -6,18 +6,13 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { addPagination } from './pagination';
 
-const libRefs = {
-  watchedBtn: document.querySelector('.watched-btn-js'),
-  queueBtn: document.querySelector('.queue-btn-js'),
-};
-
 window.addEventListener('load', onWatchedBtnClick);
-libRefs.watchedBtn.addEventListener('click', onWatchedBtnClick);
-libRefs.queueBtn.addEventListener('click', onQueueBtnClick);
+refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
+refs.queueBtn.addEventListener('click', onQueueBtnClick);
 
 function onWatchedBtnClick() {
-  libRefs.watchedBtn.classList.add('filter__btn--current');
-  libRefs.queueBtn.classList.remove('filter__btn--current');
+  refs.watchedBtn.classList.add('filter__btn--current');
+  refs.queueBtn.classList.remove('filter__btn--current');
 
   const watchedMoviesInfo = localStorage.getItem('WATCHED');
   const parsedWatchedMovies = JSON.parse(watchedMoviesInfo);
@@ -35,8 +30,8 @@ function onWatchedBtnClick() {
 }
 
 function onQueueBtnClick() {
-  libRefs.queueBtn.classList.add('filter__btn--current');
-  libRefs.watchedBtn.classList.remove('filter__btn--current');
+  refs.queueBtn.classList.add('filter__btn--current');
+  refs.watchedBtn.classList.remove('filter__btn--current');
 
   const queueMoviesInfo = localStorage.getItem('QUEUE');
   const parsedQueueMovies = JSON.parse(queueMoviesInfo);
