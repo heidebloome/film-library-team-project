@@ -1,9 +1,8 @@
 export const refs = {
   galleryList: document.querySelector('.film-list'),
   inputSearch: document.querySelector('.input'),
-<<<<<<< Updated upstream
-=======
-  upBtn: document.querySelector('#upbutton'),
+  searchForm: document.querySelector('.search-form'),
+  watchedBtn: document.querySelector('.watched-btn-js'),
+  queueBtn: document.querySelector('.queue-btn-js'),
   paginationContainer: document.getElementById('tui-pagination-container'),
->>>>>>> Stashed changes
 };
