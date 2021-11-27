@@ -42,10 +42,18 @@ function showMovies(movies) {
 /*******************поиск по запросу******************************* */
 const DEBOUNCE_DELAY = 700;
 refs.inputSearch.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
+refs.searchForm.addEventListener('submit', onInputSearch);
 
 async function onInputSearch(event) {
-  apiService.searchQuery = event.target.value.trim();
+  if (event.type === 'submit') {
+    event.preventDefault();
+  }
+  if (event.type === 'input') {
+    apiService.searchQuery = event.target.value.trim();
+  }
+
   apiService.ressetPage();
+
   if (!apiService.searchQuery) {
     Loading.standard();
     getData();
@@ -81,7 +89,6 @@ async function onInputSearch(event) {
 }
 
 // Пагинация 
-
 
 pagination.on('afterMove', showNewPage);
 

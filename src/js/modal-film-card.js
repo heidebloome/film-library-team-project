@@ -1,6 +1,8 @@
 import filmCard from '../templates/modal-film-card-template.hbs';
 import { refs } from './refs.js';
 import SearchAPI from './apiService';
+import {addWatched} from './localStorage.js';
+import { addQueue } from './localStorage';
 
 const apiService = new SearchAPI();
 
@@ -26,6 +28,11 @@ async function getFilmInfo(filmId) {
   try {
     const filmInfo = await apiService.getMovieById(filmId);
     cardMarkup(filmInfo);
+    const buttonWatched = document.querySelector('.modal__watch-list');
+    const buttonQueue = document.querySelector('.modal__queue-list');
+    buttonWatched.addEventListener('click', add => addWatched(filmInfo));
+    buttonQueue.addEventListener('click', add => addQueue(filmInfo));
+     
   } catch (error) {
     console.error(error);
   }
