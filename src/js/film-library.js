@@ -4,7 +4,7 @@ import { openModalCard } from './modal-film-card.js';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import { addPagination } from './pagination';
+import { pagination } from './pagination';
 
 window.addEventListener('load', onWatchedBtnClick);
 refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
