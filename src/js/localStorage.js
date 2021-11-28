@@ -11,7 +11,7 @@ export function addWatched(filmInfo) {
     copyLocalStorageWatched();
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
-    console.log(watched)
+    // console.log(watched)
   } else {
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
@@ -22,7 +22,7 @@ export function addQueue(filmInfo) {
     copyLocalStorageQueue();
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
-    console.log(queue)
+    // console.log(queue)
   }else{
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
@@ -49,20 +49,34 @@ function copyLocalStorageQueue() {
   });
 }
 
-// export function searchItemQueue(filmId) {
-//   const queueId = localStorage.getItem('QUEUE');
-//   const parsQueueId = JSON.parse(queueId);
+export function searchItemQueue(filmInfo) {
+  // queue.forEach(el => {
+  //   const btnAddQ = document.querySelector('.btnAddW')
+  //   const btnRmvQ = document.querySelector('.btnRmvW')
+  //   btnAddQ.classList.add('visually-hidden');
+  //   btnRmvQ.classList.remove('visually-hidden')
+  //     console.log(el);
+  // });
+   const watchedId = localStorage.getItem('QUEUE');
+  const parsWatchedId = JSON.parse(watchedId);
   
-//   if (filmCard.includes('id:&{filmId}') === true) {
-//     const btnAddQ = document.querySelector('.btnAddW')
-//     const btnRmvQ = document.querySelector('.btnRmvW')
-//     btnAddQ.classList.add('visually-hidden');
-//     btnRmvQ.classList.remove('visually-hidden')
-//       console.log(hi);
-//     // btnRmvQ.addEventListener('click');
-//   }
-//   return
-// };
+  console.log(filmInfo)
+  parsWatchedId.queue.forEach(el => {
+    console.log(typeof el === typeof filmInfo)
+    // if (el === filmInfo) {
+    //   console.log(typeof {})
+    // }
+  })
+  // if (queue.includes(filmInfo) !== false) {
+  //   console.log(typeof {})
+  //   // const btnAddQ = document.querySelector('.btnAddW')
+  //   // const btnRmvQ = document.querySelector('.btnRmvW')
+  //   // btnAddQ.classList.add('visually-hidden');
+  //   // btnRmvQ.classList.remove('visually-hidden')
+    
+  //   // btnRmvQ.addEventListener('click');
+  // }
+};
 // const filmCard = parsQueueId.forEach(el => {
     
 //   })
