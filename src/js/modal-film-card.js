@@ -2,7 +2,7 @@ import filmCard from '../templates/modal-film-card-template.hbs';
 import { refs } from './refs.js';
 import SearchAPI from './apiService';
 import {addWatched} from './localStorage.js';
-import { addQueue } from './localStorage';
+import { addQueue } from './localStorage.js';
 
 const apiService = new SearchAPI();
 
