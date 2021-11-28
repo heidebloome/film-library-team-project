@@ -48,7 +48,7 @@
 .library-navigation {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 51px;
 
   @include for-size(tablet) {
@@ -74,7 +74,7 @@
 
 .site-nav {
   display: flex;
-  align-self: end;
+  // align-self: end;
 
   &__item:not(:last-child) {
     margin-right: 39px;
