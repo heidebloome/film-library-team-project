@@ -221,7 +221,6 @@
     background: $additionalAccentColor;
     border-radius: 5px;
     border-color: $additionalAccentColor;
-    cursor: pointer;
   }
 
   &__queue-list {
@@ -245,27 +244,5 @@
     border: 1px solid $blackColor;
     box-sizing: border-box;
     border-radius: 5px;
-    cursor: pointer;
-  }
-}
-
-.modal {
-  &__watch-list {
-    &:hover,
-    :focus {
-      box-shadow: 0px 0px 3px 3px rgba(34, 60, 80, 0.5);
-    }
-    &:active {
-      transform: scale(1.03);
-    }
-  }
-  &__queue-list {
-    &:hover,
-    :focus {
-      box-shadow: 0px 0px 3px 3px rgba(34, 60, 80, 0.5);
-    }
-    &:active {
-      transform: scale(1.03);
-    }
   }
 }
