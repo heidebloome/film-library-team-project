@@ -55,7 +55,7 @@ export default class SearchAPI {
     this.#page = numOfPage;
   }
 
-  ressetPage() {
+    ressetPage() {
     this.#page = 1;
   }
 

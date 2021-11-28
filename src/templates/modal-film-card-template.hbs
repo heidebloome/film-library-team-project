@@ -8,7 +8,7 @@
       alt='poster'
     />
   {{else}}
-    <img src='{{own_poster_path}}' alt='photo' />
+    <img src='{{own_poster_path}}' alt='poster' />
   {{/if}}
 </div>
 
@@ -16,34 +16,37 @@
 
   <h1 class='modal__main-title'>{{title}}</h1>
 
-  <div class='modal__table-element'>
-    <p class='modal__data-title'>Vote / Votes</p>
-    <p><span
-        class='modal__data-description modal__data-description--average'
-      >{{vote_average}}</span>
-      /
-      <span class='modal__data-description modal__data-description--count'>{{vote_count}}</span></p>
-  </div>
-  <div class='modal__table-element'>
-    <p class='modal__data-title'>Popularity</p>
-    <p class='modal__data-description popularity-js'>{{popularity}}</p>
+  <div class='modal__table'>
+    <div class='modal__table-element'>
+      <p class='modal__data-title'>Vote / Votes</p>
+      <p class='modal__data-description'><span
+          class='modal__data-description--average'
+        >{{vote_average}}</span>
+        /
+        <span class='modal__data-description--count'>{{vote_count}}</span></p>
+    </div>
+    <div class='modal__table-element'>
+      <p class='modal__data-title'>Popularity</p>
+      <p class='modal__data-description popularity-js'>{{popularity}}</p>
+    </div>
+
+    <div class='modal__table-element'>
+      <p class='modal__data-title'>Original Title</p>
+      <p class='modal__data-description modal__data-description--title'>{{original_title}}</p>
+    </div>
+    <div class='modal__table-element'>
+      <p class='modal__data-title'>Genre</p>
+      <p class='modal__data-description modal__data-description--genre genre-js'>{{genres}}</p>
+    </div>
   </div>
 
-  <div class='modal__table-element'>
-    <p class='modal__data-title'>Original Title</p>
-    <p class='modal__data-description modal__data-description--title'>{{original_title}}</p>
-  </div>
-  <div class='modal__table-element'>
-    <p class='modal__data-title'>Genre</p>
-    <p class='modal__data-description modal__data-description--genre genre-js'>{{genres}}</p>
-  </div>
   <h2 class='modal__annotation-title'>About</h2>
 
   <p class='modal__annotation-description'>{{overview}}</p>
 
   <div class="modal__buttons-container">
-    <button type="button" class="modal__watch-list">ADD TO WATCHED</button>
-    <button type="button" class="modal__queue-list">ADD TO QUEUE</button>
+    <button type="button" class="modal__watch-list button"><span class="btnAddW">ADD TO</span> <span class="btnRmvW visually-hidden">REMOVE</span> WATCHED</button>
+    <button type="button" class="modal__queue-list button"><span class="btnAddQ">ADD TO</span> <span class="btnRmvQ visually-hidden">REMOVE</span> QUEUE</button>
   </div>
 
 </div>
