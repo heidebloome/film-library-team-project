@@ -40,7 +40,6 @@
   background-color: $whiteColor;
 
   @include for-size(tablet) {
-    display: flex;
     width: 618px;
     height: 562px;
     padding-left: 30px;
@@ -51,6 +50,12 @@
   @include for-size(desktop) {
     width: 882px;
     height: 568px;
+  }
+}
+
+.modal-content {
+  @include for-size(tablet) {
+    display: flex;
   }
 }
 
@@ -93,6 +98,10 @@
 
   overflow: hidden;
 
+  & img {
+    width: 100%;
+  }
+
   @include for-size(tablet) {
     width: 265px;
     height: 370px;
@@ -112,150 +121,162 @@
   @include for-size(tablet) {
     width: 265px;
   }
+
+  @include for-size(desktop) {
+    width: 395px;
+  }
 }
 
-.modal {
-  &__main-title {
-    @media screen and (max-width: 1023px) {
-      line-height: 1.15;
-    }
-    margin-bottom: 20px;
-    text-align: left;
-    text-transform: uppercase;
-    font-weight: 500;
+.modal__main-title {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  color: $blackColor;
+
+  @include for-size(desktop) {
     font-size: 30px;
-    line-height: 1.67;
-    color: $blackColor;
+    line-height: 1.167;
+  }
+}
+
+.modal__table {
+  margin: 0;
+  margin-bottom: 20px;
+
+  &-element:not(:last-child) {
+    margin-bottom: 10px;
   }
 
-  &__table {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-
-  //   &__data-container {
-  //     // display: flex;
-  //   }
-
-  &__table-element {
+  &-element {
     display: flex;
     align-items: center;
   }
-  &__table-element:not(:last-child) {
-    margin-bottom: 10px;
-  }
-  //   &__data-row {
-  //   }
+}
 
-  &__data-title {
-    width: 70px;
-    margin-right: 40px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
+.modal__data-title {
+  width: 105px;
 
-    color: $modalAdditionalTextColor;
-  }
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 
-  &__data-description {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
+  color: $modalAdditionalTextColor;
+}
 
-    color: $blackColor;
+.modal__data-description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 
-    &--title {
-      text-transform: uppercase;
-    }
-    &--average {
-      color: $whiteColor;
-      background-color: $additionalAccentColor;
-      border-radius: 5px;
-      padding: 1px 9px;
-    }
+  color: $blackColor;
 
-    &--count {
-      background-color: $backgroundGrayColor;
-      border-radius: 5px;
-      padding: 1px 5px;
-    }
-
-    &--genre:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
-
-  &__annotation-title {
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-
+  &--title {
     text-transform: uppercase;
-
-    color: $blackColor;
   }
 
-  &__annotation-description {
-    margin-bottom: 20px;
-    font-weight: 500;
+  & &--average {
+    padding: 1px 10px;
+
     font-size: 12px;
-    line-height: 1.67;
+    line-height: 1.166;
 
-    color: $blackColor;
-  }
+    border-radius: 5px;
 
-  &__buttons-container {
-    display: flex;
-    @media screen and(max-width:767px) {
-      justify-content: center;
-    }
-  }
-
-  &__watch-list {
-    @media screen and(max-width:767px) {
-      min-width: 112px;
-    }
-    @media screen and(min-width:768px) and(max-width:1023px) {
-      min-width: 125px;
-    }
-    @media screen and(min-width:1024px) {
-      min-width: 136px;
-    }
-    min-height: 44px;
-    margin-right: 15px;
-    padding: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    text-transform: uppercase;
     color: $whiteColor;
-    background: $additionalAccentColor;
-    border-radius: 5px;
-    border-color: $additionalAccentColor;
+    background-color: $additionalAccentColor;
   }
 
-  &__queue-list {
-    @media screen and(max-width:767px) {
-      min-width: 112px;
-    }
-    @media screen and(min-width:768px) and(max-width:1023px) {
-      min-width: 125px;
-    }
-    @media screen and(min-width:1024px) {
-      min-width: 136px;
-    }
-    min-height: 44px;
-    padding: 14px 10px;
-    font-weight: 500;
+  & &--count {
+    padding: 1px 5px;
+
     font-size: 12px;
-    line-height: 1.33;
-    text-transform: uppercase;
-    background-color: $whiteColor;
-    border-color: $blackColor;
-    border: 1px solid $blackColor;
-    box-sizing: border-box;
+    line-height: 1.166;
+
     border-radius: 5px;
+
+    background-color: $backgroundGrayColor;
   }
+}
+
+.modal__annotation-title {
+  margin-bottom: 10px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  text-transform: uppercase;
+
+  color: $blackColor;
+}
+
+.modal__annotation-description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  margin-bottom: 20px;
+
+  color: $blackColor;
+}
+
+.modal__buttons-container {
+  display: flex;
+}
+
+.button {
+  width: 110px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  text-transform: uppercase;
+
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include for-size(tablet) {
+    width: 125px;
+  }
+
+  @include for-size(desktop) {
+    width: 135px;
+  }
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
+}
+
+.modal__watch-list {
+  margin-right: 15px;
+
+  color: $whiteColor;
+  background-color: $accentColor;
+  border: none;
+}
+
+.modal__queue-list {
+  color: $blackColor;
+  background-color: transparent;
+  border: 1px solid $blackColor;
+
+  // transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  // &:hover {
+  //   border: 1px solid $accentColor;
+  // }
 }
