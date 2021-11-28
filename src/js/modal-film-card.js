@@ -35,11 +35,20 @@ async function getFilmInfo(filmId) {
     cardMarkup(filmInfo);
     const buttonWatched = document.querySelector('.modal__watch-list');
     const buttonQueue = document.querySelector('.modal__queue-list');
-    buttonWatched.addEventListener('click', add => addWatched(filmInfo));
-    buttonQueue.addEventListener('click', add => addQueue(filmInfo));
-    searchItemQueue(filmInfo)
-  
-    searchItemWatched(filmInfo)
+    if (el => searchItemQueue(filmInfo)) {
+      buttonQueue.removeEventListener('click', add => addQueue(filmInfo));
+    }
+    if (el => searchItemWatched(filmInfo)) {
+      buttonWatched.removeEventListener('click', add => addWatched(filmInfo));
+    }
+    if(!searchItemQueue(filmInfo)) {
+      buttonQueue.removeEventListener('click', remove => removeItemQ(remove));
+      buttonQueue.addEventListener('click', add => addQueue(filmInfo));
+    }
+    if (!searchItemWatched(filmInfo)) {
+      buttonWatched.removeEventListener('click', remove => removeItemW(remove));
+      buttonWatched.addEventListener('click', add => addWatched(filmInfo));
+    }
   } catch (error) {
     console.error(error);
   }
