@@ -1,6 +1,8 @@
 import { refs } from './refs';
 import SearchAPI from './apiService';
 import modal from './modal-film-card';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 
 let watched = [];
@@ -11,6 +13,7 @@ export function addWatched(filmInfo) {
     copyLocalStorageWatched();
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
+    Notify.success(`Film added to watched`);
     // console.log(watched)
   } else {
     watched.push(filmInfo)
@@ -22,6 +25,7 @@ export function addQueue(filmInfo) {
     copyLocalStorageQueue();
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
+    Notify.success(`Film added to queue`);
     // console.log(queue)
   }else{
     queue.push(filmInfo)
@@ -50,51 +54,53 @@ function copyLocalStorageQueue() {
 }
 
 export function searchItemQueue(filmInfo) {
-  // queue.forEach(el => {
-  //   const btnAddQ = document.querySelector('.btnAddW')
-  //   const btnRmvQ = document.querySelector('.btnRmvW')
-  //   btnAddQ.classList.add('visually-hidden');
-  //   btnRmvQ.classList.remove('visually-hidden')
-  //     console.log(el);
-  // });
-   const watchedId = localStorage.getItem('QUEUE');
+  if (queue.length === 0 && localStorage.getItem('QUEUE') === null) {
+    return
+  }
+   const queueId = localStorage.getItem('QUEUE');
+  const parsQueueId = JSON.parse(queueId);
+  
+  parsQueueId.queue.forEach(el => {
+    if (el.id === filmInfo.id) {
+      const btnAddQ = document.querySelector('.btnAddQ')
+      const btnRmvQ = document.querySelector('.btnRmvQ')
+      btnAddQ.classList.add('visually-hidden');
+      btnRmvQ.classList.remove('visually-hidden')
+      // buttonQueue.addEventListener('click', remove => removeItemQ(el));
+      }
+  });
+};
+
+export function searchItemWatched(filmInfo) {
+  if (watched.length === 0 && localStorage.getItem('WATCHED') === null) {
+    return
+  }
+   const watchedId = localStorage.getItem('WATCHED');
   const parsWatchedId = JSON.parse(watchedId);
   
-  console.log(filmInfo)
-  parsWatchedId.queue.forEach(el => {
-    console.log(typeof el === typeof filmInfo)
-    // if (el === filmInfo) {
-    //   console.log(typeof {})
-    // }
-  })
-  // if (queue.includes(filmInfo) !== false) {
-  //   console.log(typeof {})
-  //   // const btnAddQ = document.querySelector('.btnAddW')
-  //   // const btnRmvQ = document.querySelector('.btnRmvW')
-  //   // btnAddQ.classList.add('visually-hidden');
-  //   // btnRmvQ.classList.remove('visually-hidden')
-    
-  //   // btnRmvQ.addEventListener('click');
-  // }
+  parsWatchedId.watched.forEach(el => {
+    if (el.id === filmInfo.id) {
+      const btnAddW = document.querySelector('.btnAddW')
+      const btnRmvW = document.querySelector('.btnRmvW')
+      btnAddW.classList.add('visually-hidden');
+      btnRmvW.classList.remove('visually-hidden')
+      
+      // buttonWatched.addEventListener('click', remove => removeItemW(el));
+      console.log('hi0')
+    }
+  });
 };
-// const filmCard = parsQueueId.forEach(el => {
-    
-//   })
 
-// export function searchItemWatched(el) {
-//   const watchedId = localStorage.getItem('QUEUE');
-//   const parsWatchedId = JSON.parse(watchedId);
+export function removeItemQ(el) {
+  const queueId = localStorage.getItem('QUEUE');
+  const parsQueueId = JSON.parse(queueId);
+  const remove = parsQueueId.queue.indexOf(el);
 
-//   if (parsWatchedId.watched.includes(el) === true) {
-//     const btnAddW = document.querySelector('.btnAddW')
-//     const btnRmvW = document.querySelector('.btnRmvW')
-//     btnAddW.classList.add('visually-hidden');
-//     btnRmvW.classList.remove('visually-hidden');
-//     // btnRmvW.addEventListener('click');
-//   }
-//   return
-// };
- 
-// function removeItemQ(el) {
-//   localStorage.removeItem(queue.)
-// }
+  localStorage.removeItem(remove);
+}
+export function removeItemW(el) {
+  const watchedId = localStorage.getItem('WATCHED');
+  const parsWatchedId = JSON.parse(watchedId);
+  const remove = parsWatchedId.watched.indexOf(el);
+  localStorage.removeItem(remove);
+}

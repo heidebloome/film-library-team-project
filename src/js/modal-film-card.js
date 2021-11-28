@@ -4,6 +4,9 @@ import SearchAPI from './apiService';
 import {addWatched} from './localStorage.js';
 import { addQueue } from './localStorage.js';
 import { searchItemQueue } from './localStorage.js';
+import { searchItemWatched } from './localStorage.js';
+// import { searchItemQueue } from './localStorage.js';
+// import { searchItemWatched } from './localStorage.js';
 
 const apiService = new SearchAPI();
 
@@ -34,7 +37,9 @@ async function getFilmInfo(filmId) {
     const buttonQueue = document.querySelector('.modal__queue-list');
     buttonWatched.addEventListener('click', add => addWatched(filmInfo));
     buttonQueue.addEventListener('click', add => addQueue(filmInfo));
-    searchItemQueue(filmInfo);
+    searchItemQueue(filmInfo)
+  
+    searchItemWatched(filmInfo)
   } catch (error) {
     console.error(error);
   }
