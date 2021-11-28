@@ -1,248 +1,282 @@
 .backdrop {
-  @media screen and(max-width:768px) {
-    padding: 20px;
-  }
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
   background-color: rgba(0, 0, 0, 0.2);
 
   opacity: 1;
+  visibility: visible;
+
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   overflow-y: scroll;
-}
-//_modal-backdrop
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-}
 
-.backdrop {
-  @media screen and (min-width: 1024px) {
-    padding: 100px 70px;
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
-}
-
-//_modal-window
-.is-open {
-  overflow: hidden;
-  opacity: 1;
 }
 
 .modal {
-  //   &_ container {
-  //   }
-  @media screen and(max-width:767px) {
-    min-width: 280px;
-    max-height: 100%;
-    padding: 40px 20px;
-  }
-
-  @media screen and(min-width: 768px) and (max-width: 1023px) {
-    display: flex;
-    justify-content: center;
-    min-width: 618px;
-    min-height: 562px;
-  }
-  @media screen and(min-width:1024px) {
-    display: flex;
-    justify-content: center;
-    min-width: 882px;
-    min-height: 568px;
-  }
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: auto;
-  padding: 40px 30px;
+
+  width: 280px;
+  max-height: 90%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 50px;
+  padding-bottom: 40px;
+
+  overflow-y: auto;
 
   background-color: $whiteColor;
 
-  &__close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-    width: 30px;
-    height: 30px;
-
-    background-color: transparent;
-    border: none;
-    outline: none;
+  @include for-size(tablet) {
+    width: 618px;
+    height: 562px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 40px;
   }
 
-  &__poster-container {
-    @media screen and(min-width:768px) {
-      margin-right: 30px;
-    }
+  @include for-size(desktop) {
+    width: 882px;
+    height: 568px;
   }
+}
 
-  &__poster {
-    @media screen and(max-width:767px) {
-      min-width: 240px;
-      min-height: 357px;
-      margin-bottom: 30px;
-    }
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
-      min-width: 264px;
-      min-height: 374px;
-    }
-    @media screen and(min-width:1024px) {
-      min-width: 400px;
-      min-height: 480px;
-    }
-    display: block;
-    border-radius: 5px;
-  }
-
-  &__main-title {
-    @media screen and (max-width: 1023px) {
-      line-height: 1.15;
-    }
-    margin-bottom: 20px;
-    text-align: left;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.67;
-    color: $blackColor;
-  }
-
-  &__table {
+.modal-content {
+  @include for-size(tablet) {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  }
+}
+
+.modal__close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+
+  border: none;
+  outline: none;
+
+  .icon {
+    stroke: currentColor;
   }
 
-  //   &__data-container {
-  //     // display: flex;
-  //   }
+  &:hover {
+    cursor: pointer;
+  }
 
-  &__table-element {
+  &:hover .icon {
+    stroke: $accentColor;
+  }
+}
+
+.modal__poster-container {
+  width: 240px;
+  height: 355px;
+  margin-bottom: 30px;
+
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  & img {
+    width: 100%;
+  }
+
+  @include for-size(tablet) {
+    width: 265px;
+    height: 370px;
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+
+  @include for-size(desktop) {
+    width: 395px;
+    height: 475px;
+  }
+}
+
+.modal__data-container {
+  width: 240px;
+
+  @include for-size(tablet) {
+    width: 265px;
+  }
+
+  @include for-size(desktop) {
+    width: 395px;
+  }
+}
+
+.modal__main-title {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  color: $blackColor;
+
+  @include for-size(desktop) {
+    font-size: 30px;
+    line-height: 1.167;
+  }
+}
+
+.modal__table {
+  margin: 0;
+  margin-bottom: 20px;
+
+  &-element:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &-element {
     display: flex;
     align-items: center;
   }
-  &__table-element:not(:last-child) {
-    margin-bottom: 10px;
-  }
-  //   &__data-row {
-  //   }
+}
 
-  &__data-title {
-    width: 70px;
-    margin-right: 40px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
+.modal__data-title {
+  width: 105px;
 
-    color: $modalAdditionalTextColor;
-  }
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 
-  &__data-description {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
+  color: $modalAdditionalTextColor;
+}
 
-    color: $blackColor;
+.modal__data-description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 
-    &--title {
-      text-transform: uppercase;
-    }
-    &--average {
-      color: $whiteColor;
-      background-color: $additionalAccentColor;
-      border-radius: 5px;
-      padding: 1px 9px;
-    }
+  color: $blackColor;
 
-    &--count {
-      background-color: $backgroundGrayColor;
-      border-radius: 5px;
-      padding: 1px 5px;
-    }
-
-    &--genre:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
-
-  &__annotation-title {
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-
+  &--title {
     text-transform: uppercase;
-
-    color: $blackColor;
   }
 
-  &__annotation-description {
-    margin-bottom: 20px;
-    font-weight: 500;
+  & &--average {
+    padding: 1px 10px;
+
     font-size: 12px;
-    line-height: 1.67;
+    line-height: 1.166;
 
-    color: $blackColor;
-  }
+    border-radius: 5px;
 
-  &__buttons-container {
-    display: flex;
-    @media screen and(max-width:767px) {
-      justify-content: center;
-    }
-  }
-
-  &__watch-list {
-    @media screen and(max-width:767px) {
-      min-width: 112px;
-    }
-    @media screen and(min-width:768px) and(max-width:1023px) {
-      min-width: 125px;
-    }
-    @media screen and(min-width:1024px) {
-      min-width: 136px;
-    }
-    min-height: 44px;
-    margin-right: 15px;
-    padding: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    text-transform: uppercase;
     color: $whiteColor;
-    background: $additionalAccentColor;
-    border-radius: 5px;
-    border-color: $additionalAccentColor;
+    background-color: $additionalAccentColor;
   }
 
-  &__queue-list {
-    @media screen and(max-width:767px) {
-      min-width: 112px;
-    }
-    @media screen and(min-width:768px) and(max-width:1023px) {
-      min-width: 125px;
-    }
-    @media screen and(min-width:1024px) {
-      min-width: 136px;
-    }
-    min-height: 44px;
-    padding: 14px 10px;
-    font-weight: 500;
+  & &--count {
+    padding: 1px 5px;
+
     font-size: 12px;
-    line-height: 1.33;
-    text-transform: uppercase;
-    background-color: $whiteColor;
-    border-color: $blackColor;
-    border: 1px solid $blackColor;
-    box-sizing: border-box;
+    line-height: 1.166;
+
     border-radius: 5px;
+
+    background-color: $backgroundGrayColor;
   }
+}
+
+.modal__annotation-title {
+  margin-bottom: 10px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+  text-transform: uppercase;
+
+  color: $blackColor;
+}
+
+.modal__annotation-description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  margin-bottom: 20px;
+
+  color: $blackColor;
+}
+
+.modal__buttons-container {
+  display: flex;
+}
+
+.button {
+  width: 110px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  text-transform: uppercase;
+
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include for-size(tablet) {
+    width: 125px;
+  }
+
+  @include for-size(desktop) {
+    width: 135px;
+  }
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
+}
+
+.modal__watch-list {
+  margin-right: 15px;
+
+  color: $whiteColor;
+  background-color: $accentColor;
+  border: none;
+}
+
+.modal__queue-list {
+  color: $blackColor;
+  background-color: transparent;
+  border: 1px solid $blackColor;
+
+  // transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  // &:hover {
+  //   border: 1px solid $accentColor;
+  // }
 }

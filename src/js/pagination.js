@@ -1,9 +1,7 @@
 import Pagination from 'tui-pagination';
+import { refs } from './refs.js';
 
-const paginationContainer = document.getElementById('tui-pagination-container');
 
-
-export function addPagination() {
 const optionPagination = {
   totalItems: 1000,
   itemsPerPage: 20,
@@ -28,8 +26,8 @@ const optionPagination = {
       '<span class="tui-ico-ellip">...</span>' +
       '</a>',
   },
-};
-
-  const containerPagination = document.getElementById('tui-pagination-container');
-  window.pagination = new Pagination(paginationContainer, optionPagination);
 }
+
+
+  export const pagination = new Pagination(refs.paginationContainer, optionPagination);
+

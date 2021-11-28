@@ -6,7 +6,7 @@ import { refs } from './refs.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
-import { addPagination } from './pagination';
+import { pagination } from './pagination';
 
 import { openModalCard } from './modal-film-card.js';
 
@@ -18,10 +18,16 @@ async function getData() {
   try {
     const movies = await apiService.getMovies();
     // console.log(movies);
+    pagination.reset(movies.total_results);
+    // pagination.getCurrentPage(apiService.page)
+    console.log(movies);
+    // pagination.movePageTo(apiService.page);
     showMovies(movies.results);
   } catch (error) {
     console.error(error);
   }
+
+  
 }
 
 function showMovies(movies) {
@@ -36,9 +42,17 @@ function showMovies(movies) {
 /*******************поиск по запросу******************************* */
 const DEBOUNCE_DELAY = 700;
 refs.inputSearch.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
+refs.searchForm.addEventListener('submit', onInputSearch);
 
 async function onInputSearch(event) {
-  apiService.searchQuery = event.target.value.trim();
+  if (event.type === 'submit') {
+    event.preventDefault();
+  }
+  if (event.type === 'input') {
+    apiService.searchQuery = event.target.value.trim();
+  }
+
+  apiService.ressetPage();
 
   if (!apiService.searchQuery) {
     Loading.standard();
@@ -50,6 +64,7 @@ async function onInputSearch(event) {
   try {
     Loading.standard();
     const movies = await apiService.getMovies();
+    pagination.reset(movies.total_results)
     Loading.remove();
 
     if (movies.total_results > 0) {
@@ -64,11 +79,23 @@ async function onInputSearch(event) {
   }
 }
 
-addPagination()
+// Скролл на начало страницы   
 
-window.pagination.on('afterMove', event => {
-   // const currentPage = event.page;
-   // console.log(currentPage);
-   apiService.page = event.page;
-   getData()
-});
+ function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    belavior: 'smooth',
+  });
+}
+
+// Пагинация 
+
+pagination.on('afterMove', showNewPage);
+
+async function showNewPage(event) {
+  apiService.page = event.page;
+  const movies = await apiService.getMovies();
+
+  showMovies(movies.results)
+  scrollToTop() 
+}

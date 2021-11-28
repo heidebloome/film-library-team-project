@@ -90,8 +90,12 @@
   color: $whiteColor;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: 48px;
+  padding-top: 46px;
   margin-bottom: 38px;
+
+  @include for-size(tablet) {
+    padding-top: 41px;
+  }
 }
 
 .header {
@@ -102,6 +106,7 @@
     font-size: 12px;
     line-height: 14px;
     text-transform: uppercase;
+    padding: 7px 0;
   }
   &__logo {
     display: flex;
