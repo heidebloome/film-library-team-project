@@ -3,6 +3,7 @@ import { refs } from './refs.js';
 import SearchAPI from './apiService';
 import {addWatched} from './localStorage.js';
 import { addQueue } from './localStorage.js';
+import { searchItemQueue } from './localStorage.js';
 
 const apiService = new SearchAPI();
 
@@ -22,6 +23,7 @@ export function openModalCard(evt) {
   const filmId = evt.currentTarget.dataset.idNumber;
   // console.log(filmId);
   getFilmInfo(filmId);
+  
 }
 
 async function getFilmInfo(filmId) {
@@ -32,7 +34,7 @@ async function getFilmInfo(filmId) {
     const buttonQueue = document.querySelector('.modal__queue-list');
     buttonWatched.addEventListener('click', add => addWatched(filmInfo));
     buttonQueue.addEventListener('click', add => addQueue(filmInfo));
-     
+    searchItemQueue(filmInfo);
   } catch (error) {
     console.error(error);
   }
