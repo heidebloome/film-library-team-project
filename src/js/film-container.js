@@ -20,7 +20,7 @@ async function getData() {
     // console.log(movies);
     pagination.reset(movies.total_results);
     // pagination.getCurrentPage(apiService.page)
-    console.log(movies);
+    // console.log(movies);
     // pagination.movePageTo(apiService.page);
     showMovies(movies.results);
   } catch (error) {
