@@ -11,12 +11,21 @@ window.addEventListener('load', onWatchedBtnClick);
 refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
 refs.queueBtn.addEventListener('click', onQueueBtnClick);
 
+const currentPage = {
+  watched: true,
+  queue: false,
+};
+
 function onWatchedBtnClick() {
   refs.watchedBtn.classList.add('filter__btn--current');
   refs.queueBtn.classList.remove('filter__btn--current');
 
+  currentPage.watched = true;
+  currentPage.queue = false;
+
   if (!localStorage.getItem('WATCHED')) {
     Notify.failure('Your watched list is empty. Add any movie.');
+    pagination.reset(0);
     refs.galleryList.innerHTML = '';
     return;
   }
@@ -33,14 +42,21 @@ function onQueueBtnClick() {
   refs.queueBtn.classList.add('filter__btn--current');
   refs.watchedBtn.classList.remove('filter__btn--current');
 
+  currentPage.watched = false;
+  currentPage.queue = true;
+
   if (!localStorage.getItem('QUEUE')) {
     Notify.failure('Your queue list is empty. Add any movie.');
+    pagination.reset(0);
     refs.galleryList.innerHTML = '';
     return;
   }
 
   Loading.standard();
-  showMoviesCards(getLocalStorageDataByKey(`QUEUE`));
+  const moviesArr = getLocalStorageDataByKey(`QUEUE`);
+  pagination.reset(moviesArr.length);
+  moviesArr.splice(20);
+  showMoviesCards(moviesArr);
   Loading.remove();
 }
 
@@ -80,7 +96,13 @@ function scrollToTop() {
 pagination.on('afterMove', showNewPage);
 
 function showNewPage(event) {
-  const moviesArr = getLocalStorageDataByKey(`WATCHED`);
+  let moviesArr;
+
+  if (currentPage.watched) {
+    moviesArr = getLocalStorageDataByKey(`WATCHED`);
+  } else if (currentPage.queue) {
+    moviesArr = getLocalStorageDataByKey(`QUEUE`);
+  }
 
   const page = event.page;
   if (page === 1) {
