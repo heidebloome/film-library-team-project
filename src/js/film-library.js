@@ -5,6 +5,8 @@ import { openModalCard } from './modal-film-card.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
+import { pagination } from './pagination';
+
 window.addEventListener('load', onWatchedBtnClick);
 refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
 refs.queueBtn.addEventListener('click', onQueueBtnClick);
@@ -20,7 +22,10 @@ function onWatchedBtnClick() {
   }
 
   Loading.standard();
-  showMoviesCards(getLocalStorageDataByKey(`WATCHED`));
+  const moviesArr = getLocalStorageDataByKey(`WATCHED`);
+  pagination.reset(moviesArr.length);
+  moviesArr.splice(20);
+  showMoviesCards(moviesArr);
   Loading.remove();
 }
 
@@ -52,7 +57,7 @@ function getLocalStorageDataByKey(key) {
     movie.genre_ids = movie.genres ? genresArr.join(', ') : 'undefined';
     movie.release_date = movie.release_date ? movie.release_date.slice(0, 4) : 'undefined';
   });
-  console.log(moviesArr);
+
   return moviesArr;
 }
 
@@ -63,4 +68,29 @@ function showMoviesCards(movies) {
   cards.forEach(card => {
     card.addEventListener('click', openModalCard);
   });
+}
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    belavior: 'smooth',
+  });
+}
+
+pagination.on('afterMove', showNewPage);
+
+function showNewPage(event) {
+  const moviesArr = getLocalStorageDataByKey(`WATCHED`);
+
+  const page = event.page;
+  if (page === 1) {
+    moviesArr.splice(20);
+    showMoviesCards(moviesArr);
+  } else {
+    const startPageItem = page * 20 - 20;
+    const endPageItem = startPageItem + 20;
+    const pageToShow = moviesArr.slice(startPageItem, endPageItem);
+    showMoviesCards(pageToShow);
+  }
+  scrollToTop();
 }
