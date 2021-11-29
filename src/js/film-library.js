@@ -1,6 +1,7 @@
 import libCard from '../templates/library-film-card-template.hbs';
-import { refs } from '../js/refs';
+import { refs } from '../js/refs.js';
 import { openModalCard } from './modal-film-card.js';
+import { scrollToTop } from './up-btn.js';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
@@ -83,13 +84,6 @@ function showMoviesCards(movies) {
   const cards = document.querySelectorAll('.film-list__item');
   cards.forEach(card => {
     card.addEventListener('click', openModalCard);
-  });
-}
-
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    belavior: 'smooth',
   });
 }
 

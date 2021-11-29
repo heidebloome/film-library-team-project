@@ -6,9 +6,10 @@ import { refs } from './refs.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
-import { pagination } from './pagination';
+import { pagination } from './pagination.js';
 
 import { openModalCard } from './modal-film-card.js';
+import { scrollToTop } from './up-btn.js';
 
 const apiService = new SearchAPI();
 
@@ -26,8 +27,6 @@ async function getData() {
   } catch (error) {
     console.error(error);
   }
-
-  
 }
 
 function showMovies(movies) {
@@ -64,7 +63,7 @@ async function onInputSearch(event) {
   try {
     Loading.standard();
     const movies = await apiService.getMovies();
-    pagination.reset(movies.total_results)
+    pagination.reset(movies.total_results);
     Loading.remove();
 
     if (movies.total_results > 0) {
@@ -79,16 +78,7 @@ async function onInputSearch(event) {
   }
 }
 
-// Скролл на начало страницы   
-
- function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    belavior: 'smooth',
-  });
-}
-
-// Пагинация 
+// Пагинация
 
 pagination.on('afterMove', showNewPage);
 
@@ -96,6 +86,6 @@ async function showNewPage(event) {
   apiService.page = event.page;
   const movies = await apiService.getMovies();
 
-  showMovies(movies.results)
-  scrollToTop() 
+  showMovies(movies.results);
+  scrollToTop();
 }
