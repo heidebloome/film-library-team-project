@@ -259,6 +259,9 @@
   &:focus {
     transform: scale(1.03);
   }
+  &:active {
+    transform: scale(1);
+  }
 }
 
 .modal__watch-list {

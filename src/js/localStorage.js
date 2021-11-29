@@ -1,8 +1,4 @@
-import { refs } from './refs';
-import SearchAPI from './apiService';
-import modal from './modal-film-card';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 
 let watched = [];
@@ -18,6 +14,7 @@ export function addWatched(filmInfo) {
   } else {
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
+    
   }
 }
   
@@ -27,8 +24,9 @@ export function addQueue(filmInfo) {
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
     Notify.success(`Film added to queue`);
+    
     // console.log(queue)
-  } else{
+  } else {
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
   }
@@ -67,7 +65,9 @@ export function searchItemQueue(filmInfo) {
       addQueryQueue()
       const remove = parsQueueId.queue.indexOf(el);
        const buttonQueue = document.querySelector('.modal__queue-list');
-      buttonQueue.addEventListener('click', r => removeItemQ(remove));
+      buttonQueue.addEventListener('click', r => removeItemQ(remove), {
+        once: true
+      });
 
       return el.id === filmInfo.id
   }
@@ -98,14 +98,15 @@ export function searchItemWatched(filmInfo) {
   if (watched.length === 0 && localStorage.getItem('WATCHED') === null) {
     return
   }
-  const watchedId = localStorage.getItem('WATCHED');
-  const parsWatchedId = JSON.parse(watchedId);
+  const parsWatchedId = JSON.parse(localStorage.getItem('WATCHED'));
   return parsWatchedId.watched.some(el => {
     if (el.id === filmInfo.id) {
       addQueryWatched()
       const remove = parsWatchedId.watched.indexOf(el);
       const buttonWatched = document.querySelector('.modal__watch-list');
-      buttonWatched.addEventListener('click', r => removeItemW(remove));
+      buttonWatched.addEventListener('click', r => removeItemW(remove), {
+        once: true
+      });
       return el.id === filmInfo.id
     }
   });
