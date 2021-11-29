@@ -9,11 +9,15 @@ export function addWatched(filmInfo) {
     copyLocalStorageWatched();
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
+    addQueryWatched()
     Notify.success(`Film added to watched`);
     // console.log(watched)
   } else {
     watched.push(filmInfo)
     localStorage.setItem('WATCHED', JSON.stringify({ watched }))
+    addQueryWatched()
+    Notify.success(`Film added to watched`);
+
     
   }
 }
@@ -23,12 +27,22 @@ export function addQueue(filmInfo) {
     copyLocalStorageQueue();
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
+    addQueryQueue();
     Notify.success(`Film added to queue`);
-    
+    const buttonQueue = document.querySelector('.modal__queue-list');
+      buttonQueue.addEventListener('click', r => removeItemQ(remove), {
+        once: true
+      });
     // console.log(queue)
   } else {
     queue.push(filmInfo)
     localStorage.setItem('QUEUE', JSON.stringify({ queue }))
+    addQueryQueue()
+    Notify.success(`Film added to queue`);
+    const buttonQueue = document.querySelector('.modal__queue-list');
+      buttonQueue.addEventListener('click', r => removeItemQ(remove), {
+        once: true
+      });
   }
 }
 
@@ -68,7 +82,6 @@ export function searchItemQueue(filmInfo) {
       buttonQueue.addEventListener('click', r => removeItemQ(remove), {
         once: true
       });
-
       return el.id === filmInfo.id
   }
   });
@@ -78,6 +91,12 @@ function addQueryQueue() {
       const btnRmvQ = document.querySelector('.btnRmvQ')
       btnAddQ.classList.add('visually-hidden');
       btnRmvQ.classList.remove('visually-hidden')
+}
+function removeQueryQueue() {
+  const btnAddQ = document.querySelector('.btnAddQ')
+  const btnRmvQ = document.querySelector('.btnRmvQ')
+  btnAddQ.classList.remove('visually-hidden');
+  btnRmvQ.classList.add('visually-hidden')
 }
 function removeItemQ(remove) {
   queue.length = 0;
@@ -89,6 +108,7 @@ function removeItemQ(remove) {
   });
   queue.splice(remove, 1);
   localStorage.setItem('QUEUE', JSON.stringify({ queue }));
+  removeQueryQueue();
   Notify.success(`Film removed`);
 }
 
@@ -110,12 +130,18 @@ export function searchItemWatched(filmInfo) {
       return el.id === filmInfo.id
     }
   });
-  function addQueryWatched() {
-    const btnAddW = document.querySelector('.btnAddW')
-    const btnRmvW = document.querySelector('.btnRmvW')
-    btnAddW.classList.add('visually-hidden');
-    btnRmvW.classList.remove('visually-hidden')
-  }
+}
+function addQueryWatched() {
+  const btnAddW = document.querySelector('.btnAddW')
+  const btnRmvW = document.querySelector('.btnRmvW')
+  btnAddW.classList.add('visually-hidden');
+  btnRmvW.classList.remove('visually-hidden')
+}
+function removeQueryWatched() {
+  const btnAddW = document.querySelector('.btnAddW')
+  const btnRmvW = document.querySelector('.btnRmvW')
+  btnAddW.classList.remove('visually-hidden');
+  btnRmvW.classList.add('visually-hidden')
 }
 function removeItemW(remove) {
   watched.length = 0;
@@ -127,5 +153,6 @@ function removeItemW(remove) {
   });
   watched.splice(remove, 1);
   localStorage.setItem('WATCHED', JSON.stringify({ watched }));
+  removeQueryWatched()
   Notify.success(`Film removed`)
 }
