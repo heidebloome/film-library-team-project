@@ -35,24 +35,29 @@ async function getFilmInfo(filmId) {
     cardMarkup(filmInfo);
     const buttonWatched = document.querySelector('.modal__watch-list');
     const buttonQueue = document.querySelector('.modal__queue-list');
-    if (el => searchItemQueue(filmInfo)) {
-      buttonQueue.removeEventListener('click', add => addQueue(filmInfo));
-    }
-    if (el => searchItemWatched(filmInfo)) {
-      buttonWatched.removeEventListener('click', add => addWatched(filmInfo));
-    }
+    // if (el => searchItemQueue(filmInfo)) {
+    //   buttonQueue.removeEventListener('click', add => addQueue(filmInfo));
+    // }
+    // if (el => searchItemWatched(filmInfo)) {
+    //   buttonWatched.removeEventListener('click', add => addWatched(filmInfo));
+    // }
     if(!searchItemQueue(filmInfo)) {
       buttonQueue.removeEventListener('click', remove => removeItemQ(remove));
-      buttonQueue.addEventListener('click', add => addQueue(filmInfo));
+      buttonQueue.addEventListener('click', add => addQueue(filmInfo), {
+        once: true
+      });
     }
     if (!searchItemWatched(filmInfo)) {
       buttonWatched.removeEventListener('click', remove => removeItemW(remove));
-      buttonWatched.addEventListener('click', add => addWatched(filmInfo));
+      buttonWatched.addEventListener('click', add => addWatched(filmInfo), {
+        once: true
+      });
     }
   } catch (error) {
     console.error(error);
   }
 }
+
 
 function cardMarkup(filmInfo) {
   modalCard.insertAdjacentHTML('beforeend', filmCard(filmInfo));
