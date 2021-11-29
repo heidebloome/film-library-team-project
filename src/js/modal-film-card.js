@@ -5,8 +5,7 @@ import {addWatched} from './localStorage.js';
 import { addQueue } from './localStorage.js';
 import { searchItemQueue } from './localStorage.js';
 import { searchItemWatched } from './localStorage.js';
-// import { searchItemQueue } from './localStorage.js';
-// import { searchItemWatched } from './localStorage.js';
+
 
 const apiService = new SearchAPI();
 

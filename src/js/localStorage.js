@@ -1,9 +1,4 @@
-import { refs } from './refs';
-import SearchAPI from './apiService';
-import modal from './modal-film-card';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import {openModalCard} from './modal-film-card'
 
 
 let watched = [];
