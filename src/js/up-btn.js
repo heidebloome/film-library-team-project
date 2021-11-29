@@ -6,7 +6,9 @@ $(window).scroll(function () {
   }
 });
 
-$('.upbutton').click(function () {
+$('.upbutton').click(scrollToTop);
+
+export function scrollToTop() {
   $('html,body').animate(
     {
       scrollTop: 0,
@@ -14,4 +16,4 @@ $('.upbutton').click(function () {
     600,
   );
   return false;
-});
+}

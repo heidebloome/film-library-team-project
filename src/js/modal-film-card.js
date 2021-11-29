@@ -1,7 +1,7 @@
 import filmCard from '../templates/modal-film-card-template.hbs';
 import { refs } from './refs.js';
 import SearchAPI from './apiService';
-import {addWatched} from './localStorage.js';
+import { addWatched } from './localStorage.js';
 import { addQueue } from './localStorage.js';
 import { searchItemQueue } from './localStorage.js';
 import { searchItemWatched } from './localStorage.js';
@@ -18,6 +18,7 @@ export function openModalCard(evt) {
   buttonClose.addEventListener('click', toClickButtonClose);
   window.addEventListener('keydown', onEscKeyPress);
   modal.addEventListener('click', toClickOnOverlay);
+  document.body.classList.toggle('modal-open');
   //   console.log('open');
   if (evt) {
     modal.classList.remove('is-hidden');
@@ -25,7 +26,6 @@ export function openModalCard(evt) {
   const filmId = evt.currentTarget.dataset.idNumber;
   // console.log(filmId);
   getFilmInfo(filmId);
-  
 }
 
 async function getFilmInfo(filmId) {
@@ -34,6 +34,7 @@ async function getFilmInfo(filmId) {
     cardMarkup(filmInfo);
     const buttonWatched = document.querySelector('.modal__watch-list');
     const buttonQueue = document.querySelector('.modal__queue-list');
+
     // if (el => searchItemQueue(filmInfo)) {
     //   buttonQueue.removeEventListener('click', add => addQueue(filmInfo));
     // }
@@ -69,6 +70,7 @@ function closeModalCard() {
   buttonClose.removeEventListener('click', closeModalCard);
   modal.removeEventListener('click', toClickOnOverlay);
   window.removeEventListener('keydown', onEscKeyPress);
+  document.body.classList.toggle('modal-open');
 }
 
 function toClickButtonClose(evt) {
