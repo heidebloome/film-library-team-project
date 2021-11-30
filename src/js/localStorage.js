@@ -1,34 +1,32 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 let watched = [];
 let queue = [];
 
 export function addWatched(filmInfo) {
   if (watched.length === 0 && localStorage.getItem('WATCHED') !== null) {
     copyLocalStorageWatched();
-    watched.push(filmInfo)
-    localStorage.setItem('WATCHED', JSON.stringify({ watched }))
+    watched.push(filmInfo);
+    localStorage.setItem('WATCHED', JSON.stringify({ watched }));
     Notify.success(`Film added to watched`);
     // console.log(watched)
   } else {
-    watched.push(filmInfo)
-    localStorage.setItem('WATCHED', JSON.stringify({ watched }))
-    
+    watched.push(filmInfo);
+    localStorage.setItem('WATCHED', JSON.stringify({ watched }));
   }
 }
-  
+
 export function addQueue(filmInfo) {
   if (queue.length === 0 && localStorage.getItem('QUEUE') !== null) {
     copyLocalStorageQueue();
-    queue.push(filmInfo)
-    localStorage.setItem('QUEUE', JSON.stringify({ queue }))
+    queue.push(filmInfo);
+    localStorage.setItem('QUEUE', JSON.stringify({ queue }));
     Notify.success(`Film added to queue`);
-    
+
     // console.log(queue)
   } else {
-    queue.push(filmInfo)
-    localStorage.setItem('QUEUE', JSON.stringify({ queue }))
+    queue.push(filmInfo);
+    localStorage.setItem('QUEUE', JSON.stringify({ queue }));
   }
 }
 
@@ -39,7 +37,7 @@ function copyLocalStorageWatched() {
   // console.log(parsWatched)
   parsWatched.watched.forEach(el => {
     watched.push(el);
-  }); 
+  });
 }
 
 function copyLocalStorageQueue() {
@@ -56,34 +54,34 @@ function copyLocalStorageQueue() {
 
 export function searchItemQueue(filmInfo) {
   if (queue.length === 0 && localStorage.getItem('QUEUE') === null) {
-    return
+    return;
   }
   const queueId = localStorage.getItem('QUEUE');
   const parsQueueId = JSON.parse(queueId);
   return parsQueueId.queue.some(el => {
     if (el.id === filmInfo.id) {
-      addQueryQueue()
+      addQueryQueue();
       const remove = parsQueueId.queue.indexOf(el);
-       const buttonQueue = document.querySelector('.modal__queue-list');
+      const buttonQueue = document.querySelector('.modal__queue-list');
       buttonQueue.addEventListener('click', r => removeItemQ(remove), {
-        once: true
+        once: true,
       });
 
-      return el.id === filmInfo.id
-  }
+      return el.id === filmInfo.id;
+    }
   });
-};
+}
 function addQueryQueue() {
-  const btnAddQ = document.querySelector('.btnAddQ')
-      const btnRmvQ = document.querySelector('.btnRmvQ')
-      btnAddQ.classList.add('visually-hidden');
-      btnRmvQ.classList.remove('visually-hidden')
+  const btnAddQ = document.querySelector('.btnAddQ');
+  const btnRmvQ = document.querySelector('.btnRmvQ');
+  btnAddQ.classList.add('visually-hidden');
+  btnRmvQ.classList.remove('visually-hidden');
 }
 function removeItemQ(remove) {
   queue.length = 0;
   const queueId = localStorage.getItem('QUEUE');
   const parsQueue = JSON.parse(queueId);
-  localStorage.removeItem('QUEUE');
+  // localStorage.removeItem('QUEUE');
   parsQueue.queue.forEach(el => {
     queue.push(el);
   });
@@ -96,36 +94,36 @@ function removeItemQ(remove) {
 
 export function searchItemWatched(filmInfo) {
   if (watched.length === 0 && localStorage.getItem('WATCHED') === null) {
-    return
+    return;
   }
   const parsWatchedId = JSON.parse(localStorage.getItem('WATCHED'));
   return parsWatchedId.watched.some(el => {
     if (el.id === filmInfo.id) {
-      addQueryWatched()
+      addQueryWatched();
       const remove = parsWatchedId.watched.indexOf(el);
       const buttonWatched = document.querySelector('.modal__watch-list');
       buttonWatched.addEventListener('click', r => removeItemW(remove), {
-        once: true
+        once: true,
       });
-      return el.id === filmInfo.id
+      return el.id === filmInfo.id;
     }
   });
   function addQueryWatched() {
-    const btnAddW = document.querySelector('.btnAddW')
-    const btnRmvW = document.querySelector('.btnRmvW')
+    const btnAddW = document.querySelector('.btnAddW');
+    const btnRmvW = document.querySelector('.btnRmvW');
     btnAddW.classList.add('visually-hidden');
-    btnRmvW.classList.remove('visually-hidden')
+    btnRmvW.classList.remove('visually-hidden');
   }
 }
 function removeItemW(remove) {
   watched.length = 0;
   const watchedId = localStorage.getItem('WATCHED');
   const parsWatched = JSON.parse(watchedId);
-  localStorage.removeItem('WATCHED');
+  // localStorage.removeItem('WATCHED');
   parsWatched.watched.forEach(el => {
     watched.push(el);
   });
   watched.splice(remove, 1);
   localStorage.setItem('WATCHED', JSON.stringify({ watched }));
-  Notify.success(`Film removed`)
+  Notify.success(`Film removed`);
 }
