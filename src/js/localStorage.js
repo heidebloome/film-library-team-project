@@ -1,11 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 let watched = [];
 let queue = [];
 
-
 //******************************* */ QUEUE  **********************
+
 
 export function addQueue(filmInfo) {
   if (searchItemQueue(filmInfo) === true) {
@@ -55,7 +54,7 @@ function copyLocalStorageQueue() {
 
 export function searchItemQueue(filmInfo) {
   if (queue.length === 0 && localStorage.getItem('QUEUE') === null) {
-    return
+    return;
   }
   const parsQueueId = JSON.parse(localStorage.getItem('QUEUE'));
   return parsQueueId.queue.some(el => {
@@ -132,10 +131,10 @@ export function addWatched(filmInfo) {
   }
 
   function addQueryWatched() {
-    const btnAddW = document.querySelector('.btnAddW')
-    const btnRmvW = document.querySelector('.btnRmvW')
+    const btnAddW = document.querySelector('.btnAddW');
+    const btnRmvW = document.querySelector('.btnRmvW');
     btnAddW.classList.add('visually-hidden');
-    btnRmvW.classList.remove('visually-hidden')
+    btnRmvW.classList.remove('visually-hidden');
   }
 
   function removeQueryWatched() {

@@ -1,11 +1,10 @@
 import filmCard from '../templates/modal-film-card-template.hbs';
+import libCard from '../templates/library-film-card-template.hbs';
 import { refs } from './refs.js';
 import SearchAPI from './apiService';
-import { addWatched } from './localStorage.js';
-import { addQueue } from './localStorage.js';
-import { searchItemQueue } from './localStorage.js';
-import { searchItemWatched } from './localStorage.js';
+import { pagination } from './pagination.js';
 
+import { addWatched, addQueue, searchItemQueue, searchItemWatched } from './localStorage.js';
 
 const apiService = new SearchAPI();
 
@@ -34,6 +33,7 @@ async function getFilmInfo(filmId) {
     cardMarkup(filmInfo);
     const buttonWatched = document.querySelector('.modal__watch-list');
     const buttonQueue = document.querySelector('.modal__queue-list');
+
     searchItemQueue(filmInfo);
     buttonQueue.addEventListener('click', add => addQueue(filmInfo));
     searchItemWatched(filmInfo)
@@ -42,7 +42,6 @@ async function getFilmInfo(filmId) {
     console.error(error);
   }
 }
-
 
 function cardMarkup(filmInfo) {
   modalCard.insertAdjacentHTML('beforeend', filmCard(filmInfo));
@@ -56,6 +55,41 @@ function closeModalCard() {
   modal.removeEventListener('click', toClickOnOverlay);
   window.removeEventListener('keydown', onEscKeyPress);
   document.body.classList.toggle('modal-open');
+
+  if (window.location.pathname === '/library.html') {
+    const isInWatched = refs.watchedBtn.classList.contains('filter__btn--current');
+    if (isInWatched) {
+      const moviesArr = getLocalStorageMovies('WATCHED');
+      const page = pagination.getCurrentPage();
+      showLibraryPage(moviesArr, page);
+    } else {
+      const moviesArr = getLocalStorageMovies('QUEUE');
+      const page = pagination.getCurrentPage();
+      showLibraryPage(moviesArr, page);
+    }
+  }
+}
+
+function showLibraryPage(moviesArr, page) {
+  if (page === 1) {
+    moviesArr.splice(20);
+    showMoviesCards(moviesArr);
+  } else {
+    const startPageItem = page * 20 - 20;
+    const endPageItem = startPageItem + 20;
+    const pageToShow = moviesArr.slice(startPageItem, endPageItem);
+    showMoviesCards(pageToShow);
+  }
+}
+
+function getLocalStorageMovies(keyItem) {
+  if (keyItem === 'WATCHED') {
+    const res = JSON.parse(localStorage.getItem('WATCHED'));
+    return res ? res.watched : [];
+  } else if (keyItem === 'QUEUE') {
+    const res = JSON.parse(localStorage.getItem('QUEUE'));
+    return res ? res.queue : [];
+  }
 }
 
 function toClickButtonClose(evt) {
@@ -74,4 +108,13 @@ function onEscKeyPress(evt) {
   if (evt.code === 'Escape') {
     closeModalCard();
   }
+}
+
+function showMoviesCards(movies) {
+  refs.galleryList.innerHTML = libCard(movies);
+
+  const cards = document.querySelectorAll('.film-list__item');
+  cards.forEach(card => {
+    card.addEventListener('click', openModalCard);
+  });
 }
