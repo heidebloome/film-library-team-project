@@ -36,9 +36,9 @@ async function getFilmInfo(filmId) {
 
     searchItemQueue(filmInfo);
     buttonQueue.addEventListener('click', add => addQueue(filmInfo));
-    searchItemWatched(filmInfo)
+    searchItemWatched(filmInfo);
     buttonWatched.addEventListener('click', add => addWatched(filmInfo));
-    } catch (error) {
+  } catch (error) {
     console.error(error);
   }
 }
@@ -56,7 +56,7 @@ function closeModalCard() {
   window.removeEventListener('keydown', onEscKeyPress);
   document.body.classList.toggle('modal-open');
 
-  if (window.location.pathname === '/library.html') {
+  if (window.location.pathname === '/film-library-team-project/library.html') {
     const isInWatched = refs.watchedBtn.classList.contains('filter__btn--current');
     if (isInWatched) {
       const moviesArr = getLocalStorageMovies('WATCHED');
