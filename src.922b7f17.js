@@ -109,4 +109,4 @@ var t;!function(e,n){"object"==typeof exports&&"object"==typeof module?module.ex
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/film-container.js"),require("./js/pagination.js"),require("./js/modal-film-card.js"),require("./js/up-btn.js"),require("./js/modal-about-us.js");
 },{"./sass/main.scss":"clu1","./js/film-container.js":"qcBh","./js/pagination.js":"o8lo","./js/modal-film-card.js":"MzUv","./js/up-btn.js":"e4yY","./js/modal-about-us.js":"U5J9"}]},{},["Focm"], null)
-//# sourceMappingURL=/film-library-team-project/src.be65a2c1.js.map
+//# sourceMappingURL=/film-library-team-project/src.922b7f17.js.map
