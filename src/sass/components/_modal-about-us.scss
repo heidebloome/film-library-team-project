@@ -25,14 +25,18 @@
   top: 50%;
   left: 50%;
   width: 80%;
-  height: 85%;
+  // height: 85%;
   background: white;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-y: scroll;
+
+  @include for-size(before-desktop) {
+    height: 80%;
+    overflow-y: scroll;
+  }
   @include for-size(desktop) {
     width: 882px;
   }
