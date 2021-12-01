@@ -60,6 +60,7 @@ function closeModalCard() {
     const isInWatched = refs.watchedBtn.classList.contains('filter__btn--current');
     if (isInWatched) {
       const moviesArr = getLocalStorageMovies('WATCHED');
+      // console.log(moviesArr);
       const page = pagination.getCurrentPage();
       showLibraryPage(moviesArr, page);
     } else {
@@ -85,9 +86,29 @@ function showLibraryPage(moviesArr, page) {
 function getLocalStorageMovies(keyItem) {
   if (keyItem === 'WATCHED') {
     const res = JSON.parse(localStorage.getItem('WATCHED'));
+
+    res.watched.forEach(movie => {
+      const genresArr = movie.genres.split(', ');
+      if (genresArr.length > 2) {
+        genresArr.splice(2, genresArr.length, 'Other');
+      }
+      movie.genre_ids = movie.genres ? genresArr.join(', ') : 'undefined';
+      movie.release_date = movie.release_date ? movie.release_date.slice(0, 4) : 'undefined';
+    });
+
     return res ? res.watched : [];
   } else if (keyItem === 'QUEUE') {
     const res = JSON.parse(localStorage.getItem('QUEUE'));
+
+    res.queue.forEach(movie => {
+      const genresArr = movie.genres.split(', ');
+      if (genresArr.length > 2) {
+        genresArr.splice(2, genresArr.length, 'Other');
+      }
+      movie.genre_ids = movie.genres ? genresArr.join(', ') : 'undefined';
+      movie.release_date = movie.release_date ? movie.release_date.slice(0, 4) : 'undefined';
+    });
+
     return res ? res.queue : [];
   }
 }
